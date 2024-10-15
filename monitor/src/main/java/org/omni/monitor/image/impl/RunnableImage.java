@@ -18,6 +18,7 @@ public class RunnableImage extends ExpireImage<Runnable> {
         return null;
     }
 
+    // todo 是否需要执行时持续关注时间？
     public void runnable() {
         uTime();
         delegate.run();

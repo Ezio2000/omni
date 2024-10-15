@@ -5,7 +5,7 @@ package org.omni.toolkit.sug;
  */
 public class Sugars {
 
-    public static <E extends Throwable> void if$catch(boolean condition, E e) throws E {
+    public static <E extends Throwable> void $if$throw(boolean condition, E e) throws E {
         if (condition) {
             throw e;
         }

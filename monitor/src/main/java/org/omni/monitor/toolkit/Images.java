@@ -28,6 +28,7 @@ public class Images {
     private static final long maxLimit = 10;
 
     static {
+        registry.gauge("monitor.registry", meterCounter);
         registry.config().onMeterAdded(meter -> meterCounter.incrementAndGet());
         registry.config().onMeterRemoved(meter -> meterCounter.decrementAndGet());
     }
@@ -37,7 +38,7 @@ public class Images {
     }
 
     public static GaugeImage ofGauge(long initial, String key, String ... tags) {
-        Sugars.if$catch(meterCounter.get() >= maxLimit, new IllegalStateException("Registry is full."));
+        Sugars.$if$throw(meterCounter.get() >= maxLimit, new IllegalStateException("Registry is full."));
         var ref = new AtomicLong(initial);
         var meter = Gauge.builder(key, ref, AtomicLong::get)
                 .tags(tags)
@@ -48,7 +49,7 @@ public class Images {
     }
 
     public static CountImage ofCount(String key, String ... tags) {
-        Sugars.if$catch(meterCounter.get() >= maxLimit, new IllegalStateException("Registry is full."));
+        Sugars.$if$throw(meterCounter.get() >= maxLimit, new IllegalStateException("Registry is full."));
         var meter = Counter.builder(key)
                 .tags(tags)
                 .register(registry);
@@ -58,7 +59,7 @@ public class Images {
     }
 
     public static RunnableImage ofRunnable(Runnable runnable, String key, String ... tags) {
-        Sugars.if$catch(meterCounter.get() >= maxLimit, new IllegalStateException("Registry is full."));
+        Sugars.$if$throw(meterCounter.get() >= maxLimit, new IllegalStateException("Registry is full."));
         var meter = Timer.builder(key)
                 .tags(tags)
                 .publishPercentileHistogram(false)

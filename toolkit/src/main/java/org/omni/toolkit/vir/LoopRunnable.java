@@ -33,7 +33,7 @@ class LoopRunnable implements Runnable {
             delegate.run();
             outerCounter.incrementAndGet();
         } else {
-            Sugars.if$catch(
+            Sugars.$if$throw(
                     outerCounter.get() >= loop && loopFinished.compareAndSet(false, true),
                     new LoopException(loop, outerCounter.get())
             );

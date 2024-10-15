@@ -20,6 +20,7 @@ public abstract class ExpireImage<T> implements Image<T> {
     public abstract T ref();
 
     protected final void uTime() {
+        // todo 能去掉before吗
         if (uTime.isBefore(Instant.now())) {
             uTime = Instant.now();
         }
