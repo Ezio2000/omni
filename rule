@@ -5,3 +5,13 @@
 5、存储对象用xxRepo
 6、static final
 7、工具类 xxs 如 Virs.class
+8、key/value用key/val
+9、calculate简称cal
+10、object简称obj
+11、Object[]
+12、Manager类最大的管理类使用manager命名
+Manager -> manager operate -> operation
+13、单例参考EmptyRunnable.java
+14、方法名连词的时候，动词用简称，如updateTime -> upTime
+15、变量名连词的时候，动词用单字简称，如updateTime -> uTime
+16、方法名尽量用动词，getXX，isXX

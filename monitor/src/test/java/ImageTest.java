@@ -18,7 +18,7 @@ public class ImageTest {
                 var image = Images.ofGauge(0, "http", "a", String.valueOf(i));
                 image.setETime(Duration.ofSeconds(10));
                 if (i == 0) {
-                    Virs.loop(() -> image.gauge(System.currentTimeMillis()), 100, 500);
+                    Virs.loop(() -> image.gauge(System.currentTimeMillis()), 100, 500, false);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -37,10 +37,10 @@ public class ImageTest {
                 var image = Images.ofCount("http", "a", String.valueOf(i));
                 image.setETime(Duration.ofSeconds(10));
                 if (i == 0) {
-                    Virs.loop(image::count, 100, 500);
+                    Virs.loop(image::count, 100, 500, false);
                 }
                 if (i == 1) {
-                    Virs.loop(() -> image.count(2), 100, 500);
+                    Virs.loop(() -> image.count(2), 100, 500, false);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -62,7 +62,7 @@ public class ImageTest {
                 }, "http", "a", String.valueOf(i));
                 image.setETime(Duration.ofSeconds(10));
                 if (i == 0) {
-                    Virs.loop(image::runnable, 100, 500);
+                    Virs.loop(image::runnable, 100, 500, false);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

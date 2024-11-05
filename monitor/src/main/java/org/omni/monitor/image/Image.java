@@ -5,8 +5,8 @@ package org.omni.monitor.image;
  */
 public interface Image<T> {
 
-    T ref();
+    T getRef();
 
-    boolean positive();
+    boolean isPositive();
 
 }

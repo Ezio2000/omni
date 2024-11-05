@@ -1,4 +1,4 @@
-package org.omni.toolkit.vir;
+package org.omni.toolkit.runnable;
 
 import org.omni.toolkit.sug.Sugars;
 
@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * @author Xieningjun
  */
-class LoopRunnable implements Runnable {
+public class LoopRunnable implements Runnable {
 
     private final long loop;
 
@@ -20,7 +20,7 @@ class LoopRunnable implements Runnable {
 
     private final Runnable delegate;
 
-    LoopRunnable(Runnable delegate, long loop) {
+    public LoopRunnable(Runnable delegate, long loop) {
         this.delegate = delegate;
         this.loop = loop;
     }
@@ -40,7 +40,7 @@ class LoopRunnable implements Runnable {
         }
     }
 
-    static class LoopException extends RuntimeException {
+    public static class LoopException extends RuntimeException {
 
         public final long loop;
 

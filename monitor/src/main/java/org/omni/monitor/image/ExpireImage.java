@@ -17,9 +17,9 @@ public abstract class ExpireImage<T> implements Image<T> {
     private Duration eTime = Duration.ofMinutes(1);
 
     @Override
-    public abstract T ref();
+    public abstract T getRef();
 
-    protected final void uTime() {
+    protected final void upTime() {
         // todo 能去掉before吗
         if (uTime.isBefore(Instant.now())) {
             uTime = Instant.now();
@@ -27,7 +27,7 @@ public abstract class ExpireImage<T> implements Image<T> {
     }
 
     @Override
-    public final boolean positive() {
+    public final boolean isPositive() {
         return Duration.between(uTime, Instant.now()).compareTo(eTime) < 0;
     }
 

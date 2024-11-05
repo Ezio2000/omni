@@ -15,7 +15,7 @@ public class CountImage extends ExpireImage<Long> {
     }
 
     @Override
-    public Long ref() {
+    public Long getRef() {
         return (long) counter.count();
     }
 
@@ -24,7 +24,7 @@ public class CountImage extends ExpireImage<Long> {
     }
 
     public void count(long plus) {
-        uTime();
+        upTime();
         counter.increment(plus);
     }
 

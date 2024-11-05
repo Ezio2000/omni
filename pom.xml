@@ -12,7 +12,7 @@
     <modules>
         <module>toolkit</module>
         <module>monitor</module>
-        <module>monitor-springboot-starter</module>
+        <module>nacos</module>
     </modules>
 
     <properties>
@@ -26,6 +26,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.34</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.10</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>

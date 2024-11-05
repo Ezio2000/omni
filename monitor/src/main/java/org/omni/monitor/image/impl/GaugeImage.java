@@ -16,12 +16,12 @@ public class GaugeImage extends ExpireImage<Long> {
     }
 
     @Override
-    public Long ref() {
+    public Long getRef() {
         return ref.get();
     }
 
     public void gauge(Long uRef) {
-        uTime();
+        upTime();
         ref.set(uRef);
     }
 

@@ -14,15 +14,15 @@ public class RunnableImage extends ExpireImage<Runnable> {
     }
 
     @Override
-    public Runnable ref() {
+    public Runnable getRef() {
         return null;
     }
 
     // todo 是否需要执行时持续关注时间？
     public void runnable() {
-        uTime();
+        upTime();
         delegate.run();
-        uTime();
+        upTime();
     }
 
 }

@@ -73,7 +73,7 @@ public class Images {
     private static void hang(ExpireImage<?> image, Meter meter) {
         Virs.hang(
                 () -> registry.remove(meter.getId()),
-                () -> meterCounter.get() > clearLimit && !image.positive()
+                () -> meterCounter.get() > clearLimit && !image.isPositive()
         );
     }
 

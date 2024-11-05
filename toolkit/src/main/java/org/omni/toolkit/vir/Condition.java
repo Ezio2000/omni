@@ -5,6 +5,6 @@ package org.omni.toolkit.vir;
  */
 public interface Condition {
 
-    boolean ok();
+    boolean isOk();
 
 }

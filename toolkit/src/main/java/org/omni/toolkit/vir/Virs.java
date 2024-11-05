@@ -1,5 +1,7 @@
 package org.omni.toolkit.vir;
 
+import org.omni.toolkit.runnable.LoopRunnable;
+
 import java.util.Map;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -33,7 +35,7 @@ public class Virs {
         return Thread.ofVirtual().start(runnable);
     }
 
-    public static Future<?> loop(Runnable runnable, long loop, long period) {
+    public static Future<?> loop(Runnable runnable, long loop, long period, boolean order) {
         var loopRunnable = new LoopRunnable(runnable, loop);
         var cancel = new AtomicBoolean(false);
         // 让其在一个任务开始后，即可马上开始下一个任务
@@ -53,7 +55,7 @@ public class Virs {
     public static void hang(Runnable runnable, Condition condition) {
         one(() -> {
             try {
-                while (!condition.ok()) {
+                while (!condition.isOk()) {
                     LockSupport.parkNanos(500L * 1_000_000);
                 }
             } finally {
@@ -87,6 +89,10 @@ public class Virs {
                 runnable.run();
             }
         });
+    }
+
+    public static void keepalive() {
+        while (true) LockSupport.parkNanos(10000L * 1_000_000);
     }
 
 }
