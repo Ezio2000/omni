@@ -3,7 +3,7 @@
 //import lombok.Setter;
 //import org.omni.redis.manager.RedisCommandManager;
 //import org.omni.redis.manager.RedisInfoManager;
-//import org.omni.toolkit.struc.Tuple;
+//import org.omni.toolkit.struc.custom.Tuple;
 //import org.omni.toolkit.vir.Virs;
 //
 //import java.util.Vector;

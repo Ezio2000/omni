@@ -1,7 +1,7 @@
 package org.omni.redis.manager;
 
 import org.omni.toolkit.operate.MapHashOperate;
-import org.omni.toolkit.struc.BoundedConcurrentLinkedQueue;
+import org.omni.toolkit.struc.queue.BoundedConcurrentLinkedQueue;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;

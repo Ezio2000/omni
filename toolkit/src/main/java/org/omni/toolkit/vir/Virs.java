@@ -64,6 +64,13 @@ public class Virs {
         return future;
     }
 
+    public static void after(Runnable runnable, long after) {
+        Virs.one(() -> {
+            Virs.sleep(after);
+            runnable.run();
+        });
+    }
+
     public static void hang(Runnable runnable, Condition condition) {
         one(() -> {
             try {

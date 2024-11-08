@@ -1,6 +1,4 @@
-package org.omni.toolkit.struc;
-
-import lombok.Data;
+package org.omni.toolkit.struc.custom;
 
 /**
  * @author Xieningjun

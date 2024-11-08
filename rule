@@ -19,3 +19,4 @@ Manager -> manager operate -> operation
 18、非测试类不能使用sout 要使用log
 19、处理器handler 进程process
 20、hashKey -> hKey，列表元素 el
+21、message -> msg
