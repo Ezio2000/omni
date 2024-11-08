@@ -1,4 +1,4 @@
-package org.omni.nacos;
+package org.omni.nacos.client;
 
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigChangeEvent;
@@ -9,6 +9,7 @@ import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.alibaba.nacos.client.config.impl.ConfigChangeHandler;
 import com.alibaba.nacos.client.config.listener.impl.AbstractConfigChangeListener;
 import lombok.Setter;
+import org.omni.nacos.manager.NacosValueManager;
 import org.omni.toolkit.sug.Sugars;
 import org.omni.toolkit.vir.Virs;
 
@@ -17,7 +18,6 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.locks.LockSupport;
 
 /**
  * @author Xieningjun

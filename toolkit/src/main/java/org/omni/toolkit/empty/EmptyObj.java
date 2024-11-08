@@ -7,7 +7,7 @@ import java.util.Objects;
  */
 public class EmptyObj {
 
-    private static final EmptyObj emptyObj = new EmptyObj();
+    private static final EmptyObj emptyObj = null;
 
     private EmptyObj() {}
 

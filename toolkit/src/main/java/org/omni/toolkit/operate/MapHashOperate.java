@@ -26,19 +26,24 @@ public abstract class MapHashOperate<K, HK, V> implements HashOperate<K, HK, V> 
     }
 
     @Override
-    public void insert(K key, HK hashKey, V value) {
-        operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).putIfAbsent(hashKey, value);
+    public void insert(K key, HK hKey, V value) {
+        operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).putIfAbsent(hKey, value);
     }
 
     @Override
-    public void insert(K key, HK hashKey) {
+    public void insert(K key, HK hKey) {
         // todo 怎么处理EmptyObj?
-        operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).putIfAbsent(hashKey, (V) EmptyObj.of());
+        operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).putIfAbsent(hKey, (V) EmptyObj.of());
     }
 
     @Override
-    public void delete(K key, HK hashKey) {
-        operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).remove(hashKey);
+    public void insert(K key, Map<HK, V> map) {
+        operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).putAll(map);
+    }
+
+    @Override
+    public void delete(K key, HK hKey) {
+        operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).remove(hKey);
     }
 
     @Override
@@ -46,14 +51,15 @@ public abstract class MapHashOperate<K, HK, V> implements HashOperate<K, HK, V> 
         operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).clear();
     }
 
+    // todo 接入springboot的时候 可以给它加代理
     @Override
-    public void update(K key, HK hashKey, V value) {
-        operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).put(hashKey, value);
+    public void update(K key, HK hKey, V value) {
+        operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).put(hKey, value);
     }
 
     @Override
-    public V query(K key, HK hashKey) {
-        return operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).get(hashKey);
+    public V query(K key, HK hKey) {
+        return operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).get(hKey);
     }
 
     @Override
@@ -62,8 +68,8 @@ public abstract class MapHashOperate<K, HK, V> implements HashOperate<K, HK, V> 
     }
 
     @Override
-    public boolean exists(K key, HK hashKey) {
-        return operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).containsKey(hashKey);
+    public boolean exists(K key, HK hKey) {
+        return operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).containsKey(hKey);
     }
 
     @Override

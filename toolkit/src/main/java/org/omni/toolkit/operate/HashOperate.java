@@ -14,6 +14,8 @@ public interface HashOperate<K, HK, V> {
 
     void insert(K key, HK hashKey);
 
+    void insert(K key, Map<HK, V> map);
+
     void delete(K key, HK hashKey);
 
     void delete(K key);

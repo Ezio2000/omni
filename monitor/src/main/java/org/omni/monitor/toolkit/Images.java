@@ -37,7 +37,7 @@ public class Images {
         Metrics.addRegistry(registry);
     }
 
-    public static GaugeImage ofGauge(long initial, String key, String ... tags) {
+    public static GaugeImage ofGauge(long initial, String key, String... tags) {
         Sugars.$if$throw(meterCounter.get() >= maxLimit, new IllegalStateException("Registry is full."));
         var ref = new AtomicLong(initial);
         var meter = Gauge.builder(key, ref, AtomicLong::get)
@@ -48,7 +48,7 @@ public class Images {
         return image;
     }
 
-    public static CountImage ofCount(String key, String ... tags) {
+    public static CountImage ofCount(String key, String... tags) {
         Sugars.$if$throw(meterCounter.get() >= maxLimit, new IllegalStateException("Registry is full."));
         var meter = Counter.builder(key)
                 .tags(tags)
@@ -58,7 +58,7 @@ public class Images {
         return image;
     }
 
-    public static RunnableImage ofRunnable(Runnable runnable, String key, String ... tags) {
+    public static RunnableImage ofRunnable(Runnable runnable, String key, String... tags) {
         Sugars.$if$throw(meterCounter.get() >= maxLimit, new IllegalStateException("Registry is full."));
         var meter = Timer.builder(key)
                 .tags(tags)

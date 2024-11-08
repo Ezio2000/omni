@@ -1,4 +1,4 @@
-package org.omni.nacos;
+package org.omni.nacos.manager;
 
 import org.omni.toolkit.empty.EmptyObj;
 import org.omni.toolkit.operate.MapHashOperate;
@@ -13,8 +13,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class NacosValueManager extends MapHashOperate<String, String, Object> {
 
     @Override
-    public void insert(String key, String hashKey) {
-        operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).putIfAbsent(hashKey, EmptyObj.of());
+    public void insert(String key, String hKey) {
+        operate.computeIfAbsent(key, k -> new ConcurrentHashMap<>()).putIfAbsent(hKey, EmptyObj.of());
     }
 
 }

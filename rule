@@ -1,6 +1,6 @@
 1、Exception简称e; Throwable简称t
 2、request简称req; response简称res; connect简称conn; httpClient简称client
-3、集合用xxList, xxMap
+3、集合用xxList, xxMap，[]用xxs
 4、TimeUnit如无意外要用mill
 5、存储对象用xxRepo
 6、static final
@@ -15,3 +15,7 @@ Manager -> manager operate -> operation
 14、方法名连词的时候，动词用简称，如updateTime -> upTime
 15、变量名连词的时候，动词用单字简称，如updateTime -> uTime
 16、方法名尽量用动词，getXX，isXX
+17、如果方法名是一个命令 则用命令命名 如redis.info
+18、非测试类不能使用sout 要使用log
+19、处理器handler 进程process
+20、hashKey -> hKey，列表元素 el

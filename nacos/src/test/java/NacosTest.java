@@ -1,7 +1,7 @@
 import com.alibaba.nacos.api.exception.NacosException;
 import org.junit.Test;
-import org.omni.nacos.Nacos;
-import org.omni.nacos.NacosValueManager;
+import org.omni.nacos.client.Nacos;
+import org.omni.nacos.manager.NacosValueManager;
 import org.omni.toolkit.vir.Virs;
 
 /**

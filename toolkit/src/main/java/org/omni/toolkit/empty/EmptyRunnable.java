@@ -7,7 +7,7 @@ import java.util.Objects;
  */
 public class EmptyRunnable implements Runnable {
 
-    private static final EmptyRunnable emptyRunnable = new EmptyRunnable();
+    private static final EmptyRunnable emptyRunnable = null;
 
     private EmptyRunnable() {}
 

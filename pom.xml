@@ -13,6 +13,7 @@
         <module>toolkit</module>
         <module>monitor</module>
         <module>nacos</module>
+        <module>redis</module>
     </modules>
 
     <properties>

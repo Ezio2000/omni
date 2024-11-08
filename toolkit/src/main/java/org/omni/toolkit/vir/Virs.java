@@ -39,16 +39,28 @@ public class Virs {
         var loopRunnable = new LoopRunnable(runnable, loop);
         var cancel = new AtomicBoolean(false);
         // 让其在一个任务开始后，即可马上开始下一个任务
-        var future = scheduler.scheduleAtFixedRate(() -> {
-            one(() -> {
-                try {
-                    loopRunnable.run();
-                } catch (LoopRunnable.LoopException e) {
-                    cancel.set(true);
-                }
-            });
-        }, 0, period, TimeUnit.MILLISECONDS /* 也就是说 目前只支持到1000rps 如果要支持更高rps 需要改nano */);
-        cancelMap.put(future, cancel);
+        ScheduledFuture<?> future;
+        if (order) {
+            future = scheduler.scheduleAtFixedRate(() -> {
+                one(() -> {
+                    try {
+                        loopRunnable.run();
+                    } catch (LoopRunnable.LoopException e) {
+                        cancel.set(true);
+                    }
+                });
+            }, 0, period, TimeUnit.MILLISECONDS /* 也就是说 目前只支持到1000rps 如果要支持更高rps 需要改nano */);
+            cancelMap.put(future, cancel);
+        } else {
+            future = scheduler.scheduleAtFixedRate(() -> {
+                    try {
+                        loopRunnable.run();
+                    } catch (LoopRunnable.LoopException e) {
+                        cancel.set(true);
+                    }
+                }, 0, period, TimeUnit.MILLISECONDS /* 也就是说 目前只支持到1000rps 如果要支持更高rps 需要改nano */);
+            cancelMap.put(future, cancel);
+        }
         return future;
     }
 
@@ -89,6 +101,10 @@ public class Virs {
                 runnable.run();
             }
         });
+    }
+
+    public static void sleep(long millis) {
+        LockSupport.parkNanos(millis * 1_000_000);
     }
 
     public static void keepalive() {
