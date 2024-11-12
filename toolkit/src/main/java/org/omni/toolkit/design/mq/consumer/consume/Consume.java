@@ -1,6 +1,7 @@
 package org.omni.toolkit.design.mq.consumer.consume;
 
 import org.omni.toolkit.design.mq.event.Event;
+import org.omni.toolkit.vir.Virs;
 
 import java.util.Queue;
 
@@ -11,6 +12,6 @@ import java.util.Queue;
  */
 public interface Consume<T> {
 
-    void consume(Queue<Event<T>> queue);
+    Virs.LoopFuture consume(Queue<Event<T>> queue);
 
 }

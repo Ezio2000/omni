@@ -7,6 +7,6 @@ package org.omni.toolkit.design.mq.event;
  */
 public interface Event<T> {
 
-    T gatData();
+    T getData();
 
 }

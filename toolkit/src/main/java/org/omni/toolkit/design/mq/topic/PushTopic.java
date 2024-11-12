@@ -3,10 +3,13 @@ package org.omni.toolkit.design.mq.topic;
 import lombok.Setter;
 import org.omni.toolkit.design.mq.event.Event;
 import org.omni.toolkit.design.mq.producer.Producer;
+import org.omni.toolkit.design.mq.topic.balance.HashRebalance;
 import org.omni.toolkit.design.mq.topic.balance.Rebalance;
 import org.omni.toolkit.design.mq.consumer.Consumer;
+import org.omni.toolkit.design.mq.topic.push.OrderPush;
 import org.omni.toolkit.design.mq.topic.push.Push;
 import org.omni.toolkit.ex.ForbiddenException;
+import org.omni.toolkit.sug.Sugars;
 import org.omni.toolkit.vir.Virs;
 
 import java.util.*;
@@ -35,8 +38,9 @@ public class PushTopic<T> implements MsgQueue<T> {
     protected final AtomicInteger queueCursor = new AtomicInteger(0);
 
     @Setter
-    protected Rebalance<T> rebalance;
+    protected Rebalance<T> rebalance = new HashRebalance<>();
 
+    // todo 这里如果非顺序的话 会创建大量线程 怎么办
     @Setter
     protected Push<T> push;
 
@@ -86,6 +90,7 @@ public class PushTopic<T> implements MsgQueue<T> {
     // todo 调一次就行
     @Override
     public synchronized void push() {
+        Sugars.$ifNull$throw(push, new IllegalAccessError("Push can't be null."));
         push.consumerPush(consumerSubscribeMap);
         push.producerPush(producerSubscribeMap);
     }
@@ -101,8 +106,8 @@ public class PushTopic<T> implements MsgQueue<T> {
         // todo 建立在queueList不能变的前提
         // todo 这里释放了太多对象给别人改，没做好封闭性
         // 这里必须要单线程？
-        consumerSubscribeMap.putAll(rebalance.consumerRebalance(queueList, consumerList));
-        producerSubscribeMap.putAll(rebalance.producerRebalance(queueList, producerList));
+        if (!consumerList.isEmpty()) consumerSubscribeMap.putAll(rebalance.consumerRebalance(queueList, consumerList));
+        if (!producerList.isEmpty()) producerSubscribeMap.putAll(rebalance.producerRebalance(queueList, producerList));
         push();
     }
 

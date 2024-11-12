@@ -25,12 +25,17 @@ public class OrderConsume<T> implements Consume<T> {
     }
 
     @Override
-    public void consume(Queue<Event<T>> queue) {
+    public Virs.LoopFuture consume(Queue<Event<T>> queue) {
         Sugars.$ifNull$throw(listener, new IllegalAccessError("Listener can't be null."));
-        Virs.loop(() -> {
+        return Virs.loop(() -> {
             var event = queue.poll();
-            if (event != null) listener.listen(event);
+            if (event != null)
+                getListener().listen(event);
         }, -1, 1, isOrder);
+    }
+
+    private EventListener<T> getListener() {
+        return listener;
     }
 
 }

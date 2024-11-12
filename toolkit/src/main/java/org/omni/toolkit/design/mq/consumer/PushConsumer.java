@@ -1,9 +1,8 @@
 package org.omni.toolkit.design.mq.consumer;
 
-import lombok.Setter;
 import org.omni.toolkit.design.mq.event.Event;
 import org.omni.toolkit.design.mq.consumer.consume.Consume;
-import org.omni.toolkit.design.mq.consumer.consume.OrderConsume;
+import org.omni.toolkit.vir.Virs;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -16,12 +15,9 @@ public class PushConsumer<T> implements Consumer<T> {
 
     private final Queue<Event<T>> queue = new ConcurrentLinkedQueue<>();
 
-    @Setter
-    private Consume<T> consume = new OrderConsume<>(false);
+    private Consume<T> consume;
 
-    public PushConsumer() {
-        consume();
-    }
+    private Virs.LoopFuture future;
 
     @Override
     public void consume(Event<T> event) {
@@ -29,7 +25,18 @@ public class PushConsumer<T> implements Consumer<T> {
     }
 
     private void consume() {
-        consume.consume(queue);
+        // todo 改简洁
+        if (consume != null) {
+            if (future != null) {
+                future.close();
+            }
+            future = consume.consume(queue);
+        }
+    }
+
+    public void setConsume(Consume<T> consume) {
+        this.consume = consume;
+        consume();
     }
 
 }

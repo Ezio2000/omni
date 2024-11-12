@@ -1,5 +1,6 @@
 package org.omni.toolkit.design.mq.topic.push;
 
+import lombok.extern.slf4j.Slf4j;
 import org.omni.toolkit.design.mq.event.Event;
 import org.omni.toolkit.design.mq.consumer.Consumer;
 import org.omni.toolkit.design.mq.producer.Producer;
@@ -14,6 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2024/11/12 10:46
  * @description
  */
+@Slf4j
 public class OrderPush<T> implements Push<T> {
 
     protected final Map<Consumer<T>, Virs.LoopFuture> consumerPushFutureMap = new ConcurrentHashMap<>();
@@ -39,7 +41,9 @@ public class OrderPush<T> implements Push<T> {
             // 消费速度最高为1000rps
             future = Virs.loop(() -> {
                 var event = queue.poll();
-                if (event != null) consumer.consume(event);
+                if (event != null) {
+                    consumer.consume(event);
+                }
             }, -1, 1, isOrder);
             consumerPushFutureMap.put(consumer, future);
         }
@@ -58,7 +62,9 @@ public class OrderPush<T> implements Push<T> {
             // 消费速度最高为1000rps
             future = Virs.loop(() -> {
                 var event = producer.getEvent();
-                queue.add(event);
+                if (event != null) {
+                    queue.add(event);
+                }
             }, -1, 1, isOrder);
             producerPushFutureMap.put(producer, future);
         }

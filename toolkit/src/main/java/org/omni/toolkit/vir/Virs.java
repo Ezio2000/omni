@@ -3,7 +3,6 @@ package org.omni.toolkit.vir;
 import org.omni.toolkit.runnable.LoopRunnable;
 
 import java.io.Closeable;
-import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -14,7 +13,8 @@ import java.util.concurrent.locks.LockSupport;
  */
 public class Virs {
 
-    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1 /* 改成初始化 */, Thread.ofVirtual().factory());
+    // todo 如何设置为可调大小？
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2 /* 改成初始化 */, Thread.ofVirtual().factory());
 
     private static final Map<Future<?>, AtomicBoolean> cancelMap = new ConcurrentHashMap<>();
 
@@ -40,8 +40,17 @@ public class Virs {
     public static LoopFuture loop(Runnable runnable, long loop, long period, boolean order) {
         var loopRunnable = new LoopRunnable(runnable, loop);
         var cancel = new AtomicBoolean(false);
-        // 让其在一个任务开始后，即可马上开始下一个任务
+        // !order让其在一个任务开始后，即可马上开始下一个任务
         if (order) {
+            var future = scheduler.scheduleAtFixedRate(() -> {
+                try {
+                    loopRunnable.run();
+                } catch (LoopRunnable.LoopException e) {
+                    cancel.set(true);
+                }
+            }, 0, period, TimeUnit.MILLISECONDS /* 也就是说 目前只支持到1000rps 如果要支持更高rps 需要改nano */);
+            cancelMap.put(future, cancel);
+        } else {
             var future = scheduler.scheduleAtFixedRate(() -> {
                 one(() -> {
                     try {
@@ -51,15 +60,6 @@ public class Virs {
                     }
                 });
             }, 0, period, TimeUnit.MILLISECONDS /* 也就是说 目前只支持到1000rps 如果要支持更高rps 需要改nano */);
-            cancelMap.put(future, cancel);
-        } else {
-            var future = scheduler.scheduleAtFixedRate(() -> {
-                    try {
-                        loopRunnable.run();
-                    } catch (LoopRunnable.LoopException e) {
-                        cancel.set(true);
-                    }
-                }, 0, period, TimeUnit.MILLISECONDS /* 也就是说 目前只支持到1000rps 如果要支持更高rps 需要改nano */);
             cancelMap.put(future, cancel);
         }
         return new LoopFuture(cancel);
@@ -109,10 +109,6 @@ public class Virs {
                 runnable.run();
             }
         });
-    }
-
-    public static void chain(Runnable[] runnables) {
-
     }
 
     public static void sleep(long millis) {

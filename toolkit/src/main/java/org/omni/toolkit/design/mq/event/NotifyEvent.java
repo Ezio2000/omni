@@ -20,7 +20,7 @@ public class NotifyEvent implements Event<EmptyObj> {
     }
 
     @Override
-    public EmptyObj gatData() {
+    public EmptyObj getData() {
         return EmptyObj.of();
     }
 
