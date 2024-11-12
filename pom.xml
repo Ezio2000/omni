@@ -14,6 +14,7 @@
         <module>monitor</module>
         <module>nacos</module>
         <module>redis</module>
+        <module>mysql</module>
     </modules>
 
     <properties>

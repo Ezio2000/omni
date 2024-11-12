@@ -1,4 +1,4 @@
-package org.omni.toolkit.struc.list;
+package org.omni.toolkit.design.list;
 
 import org.omni.toolkit.ex.ForbiddenException;
 import org.omni.toolkit.vir.Virs;

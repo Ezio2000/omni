@@ -1,4 +1,4 @@
-package org.omni.toolkit.struc.queue;
+package org.omni.toolkit.design.queue;
 
 import org.omni.toolkit.sug.Sugars;
 

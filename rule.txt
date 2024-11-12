@@ -1,5 +1,5 @@
 1、Exception简称e; Throwable简称t
-2、request简称req; response简称res; connect简称conn; httpClient简称client
+2、request简称req; response简称resp; connect简称conn; httpClient简称client; statement->stmt; result -> res
 3、集合用xxList, xxMap，[]用xxs
 4、TimeUnit如无意外要用mill
 5、存储对象用xxRepo
@@ -20,3 +20,7 @@ Manager -> manager operate -> operation
 19、处理器handler 进程process
 20、hashKey -> hKey，列表元素 el
 21、message -> msg
+22、结果的对象 xxHolder
+23、database -> db
+24、updateObservers 主谓时可以使用xxs
+25、方法有多个参数 用[]不用...

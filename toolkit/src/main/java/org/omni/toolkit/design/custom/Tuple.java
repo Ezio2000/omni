@@ -1,4 +1,4 @@
-package org.omni.toolkit.struc.custom;
+package org.omni.toolkit.design.custom;
 
 /**
  * @author Xieningjun
