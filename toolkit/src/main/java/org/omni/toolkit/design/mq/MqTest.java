@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class MqTest {
 
-    // 没有sleep再多测一些
+    // 没有sleep再多测一些，有序无序
     public static void main(String[] args) throws InterruptedException {
         var topic = new PushTopic<String>(12);
         var push = new OrderPush<String>(true);
@@ -28,7 +28,12 @@ public class MqTest {
         for (int i = 0; i < 2; i++) {
             var producer = new PushProducer<String>();
             topic.subscribe(producer);
-            producer.produce(() -> "Hello World");
+            producer.produce(() -> {
+                System.out.println("生产者: " + producer);
+                System.out.println("生产线程: " + Thread.currentThread());
+                System.out.println("\n");
+                return "Hello World";
+            });
             producerList.add(producer);
         }
         for (int i = 0; i < 2; i++) {
@@ -50,8 +55,18 @@ public class MqTest {
         Virs.sleep(100);
 //        Thread.sleep(1000);
         for (var producer : producerList) {
-            producer.produce(() -> "Hello World 2");
-            producer.produce(() -> "Hello World 3");
+            producer.produce(() -> {
+                System.out.println("生产者: " + producer);
+                System.out.println("生产线程: " + Thread.currentThread());
+                System.out.println("\n");
+                return "Hello World 2";
+            });
+            producer.produce(() -> {
+                System.out.println("生产者: " + producer);
+                System.out.println("生产线程: " + Thread.currentThread());
+                System.out.println("\n");
+                return "Hello World 3";
+            });
         }
         Virs.keepalive();
     }
