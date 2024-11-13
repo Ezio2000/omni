@@ -1,4 +1,4 @@
-package org.omni.toolkit.runnable;
+package org.omni.toolkit.vir;
 
 import org.omni.toolkit.sug.Sugars;
 

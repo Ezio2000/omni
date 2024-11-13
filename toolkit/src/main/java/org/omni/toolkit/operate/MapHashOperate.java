@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author Xieningjun
  */
-public abstract class MapHashOperate<K, HK, V> implements HashOperate<K, HK, V> {
+public class MapHashOperate<K, HK, V> implements HashOperate<K, HK, V> {
 
     protected Map<K, Map<HK, V>> operate = new ConcurrentHashMap<>();
 

@@ -1,7 +1,5 @@
 package org.omni.toolkit.vir;
 
-import org.omni.toolkit.runnable.LoopRunnable;
-
 import java.io.Closeable;
 import java.util.Map;
 import java.util.concurrent.*;
