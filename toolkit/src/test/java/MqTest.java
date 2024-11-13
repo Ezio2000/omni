@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class MqTest {
 
     // 没有sleep再多测一些，有序无序
+    // todo 一定要简单topic, producer, consumer的初始化
     public static void main(String[] args) throws InterruptedException {
         var topic = new PushTopic<String>(12);
         var push = new OrderPush<String>(true);

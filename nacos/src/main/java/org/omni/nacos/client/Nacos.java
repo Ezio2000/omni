@@ -9,6 +9,8 @@ import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.alibaba.nacos.client.config.impl.ConfigChangeHandler;
 import com.alibaba.nacos.client.config.listener.impl.AbstractConfigChangeListener;
 import lombok.Setter;
+import org.omni.nacos.command.ConfigCommand;
+import org.omni.nacos.command.NamingCommand;
 import org.omni.nacos.manager.NacosValueManager;
 import org.omni.toolkit.sug.Sugars;
 import org.omni.toolkit.vir.Virs;
@@ -22,7 +24,7 @@ import java.util.concurrent.Executors;
 /**
  * @author Xieningjun
  */
-public class Nacos {
+public class Nacos implements NamingCommand, ConfigCommand {
 
     private final String serverAddr;
 
@@ -58,6 +60,7 @@ public class Nacos {
         this.current = buildInstance();
     }
 
+    @Override
     public synchronized void register() throws NacosException {
         Sugars.$ifNotNull$throw(namingService, new IllegalAccessError("Service already registered."));
         var properties = new Properties();
@@ -73,11 +76,13 @@ public class Nacos {
         current.addMetadata(key, val);
     }
 
+    @Override
     public Instance discover(String serviceName) throws NacosException {
         return namingService.selectOneHealthyInstance(serviceName, group, Collections.singletonList(cluster));
     }
 
     // 加回调
+    @Override
     public void subscribe(String dataId) throws NacosException {
         var listener = new VirListener() {
             @Override
