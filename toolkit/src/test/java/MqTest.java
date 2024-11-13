@@ -1,5 +1,3 @@
-package org.omni.toolkit.design.mq;
-
 import org.omni.toolkit.design.mq.consumer.PushConsumer;
 import org.omni.toolkit.design.mq.consumer.consume.OrderConsume;
 import org.omni.toolkit.design.mq.event.Event;
