@@ -27,20 +27,4 @@ public class AuthTest {
         System.out.println(client);
     }
 
-    @Test
-    public void ruqiDevPlatformAuth() throws IOException, InterruptedException {
-        var phone = "#account_xieningjun";
-        var password = "1egdD3lbPlQvyLRq/1FVKg==";
-        var smsCode = 2;
-        var body = "{\"phone\":\"%s\", \"password\":\"%s\", \"smsCode\":%s}".formatted(phone, password, smsCode);
-        var req = HttpRequest.newBuilder()
-                .uri(URI.create("https://login.rqwork.ruqimobility.com/dev/login/v1/complex"))
-                // todo 要改成form-data才支持
-                .POST(HttpRequest.BodyPublishers.noBody())
-                .build();
-        var auth = new Auth(req);
-        var client = auth.httpStatusAuth(Arrays.asList(200));
-        System.out.println(client);
-    }
-
 }
