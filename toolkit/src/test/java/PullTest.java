@@ -1,6 +1,5 @@
 import org.omni.toolkit.design.event.Event;
 import org.omni.toolkit.design.event.EventListener;
-import org.omni.toolkit.design.mq.consumer.Consumer;
 import org.omni.toolkit.design.mq.consumer.PullConsumer;
 import org.omni.toolkit.design.mq.consumer.consume.OrderConsume;
 import org.omni.toolkit.design.mq.producer.PullProducer;
@@ -68,6 +67,7 @@ public class PullTest {
                 return "Hello World 3";
             });
         }
+        Virs.sleep(5000);
         consumerList.forEach(PullConsumer::pull);
         consumerList.forEach(PullConsumer::pull);
         consumerList.forEach(PullConsumer::pull);
