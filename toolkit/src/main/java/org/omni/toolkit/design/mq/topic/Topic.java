@@ -1,15 +1,13 @@
 package org.omni.toolkit.design.mq.topic;
 
 import lombok.Setter;
-import org.omni.toolkit.design.mq.event.Event;
+import org.omni.toolkit.design.event.Event;
 import org.omni.toolkit.design.mq.producer.Producer;
 import org.omni.toolkit.design.mq.topic.balance.HashRebalance;
 import org.omni.toolkit.design.mq.topic.balance.Rebalance;
 import org.omni.toolkit.design.mq.consumer.Consumer;
-import org.omni.toolkit.design.mq.topic.push.OrderPush;
+import org.omni.toolkit.design.mq.topic.pull.Pull;
 import org.omni.toolkit.design.mq.topic.push.Push;
-import org.omni.toolkit.ex.ForbiddenException;
-import org.omni.toolkit.sug.Sugars;
 import org.omni.toolkit.vir.Virs;
 
 import java.util.*;
@@ -23,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2024/11/11 16:20
  * @description
  */
-public class PushTopic<T> implements MsgQueue<T> {
+public class Topic<T> implements MsgQueue<T> {
 
     protected final List<Queue<Event<T>>> queueList = new CopyOnWriteArrayList<>();
 
@@ -44,7 +42,10 @@ public class PushTopic<T> implements MsgQueue<T> {
     @Setter
     protected Push<T> push;
 
-    public PushTopic(int queueNum) {
+    @Setter
+    protected Pull<T> pull;
+
+    public Topic(int queueNum) {
         for (int i = 0; i < queueNum; i++) {
             queueList.add(new ConcurrentLinkedQueue<>());
         }
@@ -83,22 +84,9 @@ public class PushTopic<T> implements MsgQueue<T> {
 
     @Override
     public void submit(Event<T> event, int index) {
+        index = index % queueList.size();
         var queue = queueList.get(index);
         queue.add(event);
-    }
-
-    // todo 调一次就行
-    @Override
-    public synchronized void push() {
-        Sugars.$ifNull$throw(push, new IllegalAccessError("Push can't be null."));
-        push.consumerPush(consumerSubscribeMap);
-        push.producerPush(producerSubscribeMap);
-    }
-
-    @Override
-    public Event<T> pull() {
-        // todo 还没写完
-        throw new ForbiddenException("Push topic can't be pull.");
     }
 
     // todo NULL的情况还没考虑进去
@@ -108,7 +96,21 @@ public class PushTopic<T> implements MsgQueue<T> {
         // 这里必须要单线程？
         if (!consumerList.isEmpty()) consumerSubscribeMap.putAll(rebalance.consumerRebalance(queueList, consumerList));
         if (!producerList.isEmpty()) producerSubscribeMap.putAll(rebalance.producerRebalance(queueList, producerList));
-        push();
+        notice();
+    }
+
+    // todo 调一次就行
+    private synchronized void notice() {
+        // todo
+//        Sugars.$ifNull$throw(push, new IllegalAccessError("Push can't be null."));
+        if (push != null) {
+            push.consumerPush(consumerSubscribeMap);
+            push.producerPush(producerSubscribeMap);
+        }
+        if (pull != null) {
+            pull.consumerPull(consumerSubscribeMap);
+            pull.producerPull(producerSubscribeMap);
+        }
     }
 
 }

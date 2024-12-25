@@ -1,6 +1,6 @@
 package org.omni.toolkit.design.mq.producer;
 
-import org.omni.toolkit.design.mq.event.Event;
+import org.omni.toolkit.design.event.Event;
 import org.omni.toolkit.design.mq.topic.MsgQueueClient;
 
 /**

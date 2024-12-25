@@ -24,3 +24,4 @@ Manager -> manager operate -> operation
 23、database -> db
 24、updateObservers 主谓时可以使用xxs
 25、方法有多个参数 用[]不用...
+26、previous简称prev

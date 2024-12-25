@@ -1,4 +1,4 @@
-package org.omni.toolkit.design.mq.event;
+package org.omni.toolkit.design.event;
 
 import org.omni.toolkit.empty.EmptyObj;
 

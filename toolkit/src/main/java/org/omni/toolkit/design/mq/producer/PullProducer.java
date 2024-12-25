@@ -7,11 +7,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * @author Xieningjun
- * @date 2024/11/12 13:41
+ * @date 2024/12/25 10:39
  * @description
  */
-// push和pull 是指topic对producer而言
-public class PushProducer<T> implements Producer<T> {
+public class PullProducer<T> implements Producer<T> {
 
     private final Queue<Event<T>> queue = new ConcurrentLinkedQueue<>();
 

@@ -1,7 +1,7 @@
 package org.omni.toolkit.design.mq.topic;
 
 import org.omni.toolkit.design.mq.consumer.Consumer;
-import org.omni.toolkit.design.mq.event.Event;
+import org.omni.toolkit.design.event.Event;
 import org.omni.toolkit.design.mq.producer.Producer;
 
 /**
@@ -22,9 +22,5 @@ public interface MsgQueue<T> {
     void submit(Event<T> event);
 
     void submit(Event<T> event, int index);
-
-    void push();
-
-    Event<T> pull();
 
 }

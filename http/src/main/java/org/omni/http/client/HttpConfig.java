@@ -14,4 +14,11 @@ public class HttpConfig {
 
     private long readTimeout = 2000L;
 
+    public HttpConfig() {}
+
+    public HttpConfig(long connTimeout, long readTimeout) {
+        this.connTimeout = connTimeout;
+        this.readTimeout = readTimeout;
+    }
+
 }

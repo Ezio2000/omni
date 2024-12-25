@@ -1,8 +1,8 @@
 package org.omni.toolkit.design.mq.consumer.consume;
 
 import lombok.Setter;
-import org.omni.toolkit.design.mq.event.Event;
-import org.omni.toolkit.design.mq.event.EventListener;
+import org.omni.toolkit.design.event.Event;
+import org.omni.toolkit.design.event.EventListener;
 import org.omni.toolkit.sug.Sugars;
 import org.omni.toolkit.vir.Virs;
 

@@ -1,14 +1,8 @@
 package org.omni.grafana.client;
 
-import org.omni.http.resp.AdaptiveBodyHandler;
-import org.omni.http.resp.GenericBodyHandler;
-import org.omni.toolkit.vir.Virs;
-
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
-import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;

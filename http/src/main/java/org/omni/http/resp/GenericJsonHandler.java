@@ -9,11 +9,11 @@ import java.nio.charset.StandardCharsets;
 /**
  * @author Xieningjun
  */
-public class GenericBodyHandler<T> implements HttpResponse.BodyHandler<T> {
+public class GenericJsonHandler<T> implements HttpResponse.BodyHandler<T> {
 
     private final Type type;
 
-    public GenericBodyHandler(Type type) {
+    public GenericJsonHandler(Type type) {
         this.type = type;
     }
 
@@ -28,7 +28,7 @@ public class GenericBodyHandler<T> implements HttpResponse.BodyHandler<T> {
     // 将 JSON 字符串转换为 T 类型对象
     private T convert(String body) {
         var gson = new Gson();
-        // todo 会有报格式转换错误
+        // todo 如果body不是json会有报格式转换错误
         return gson.fromJson(body, type);
     }
 

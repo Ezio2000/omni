@@ -1,6 +1,6 @@
 package org.omni.toolkit.design.mq.topic.push;
 
-import org.omni.toolkit.design.mq.event.Event;
+import org.omni.toolkit.design.event.Event;
 import org.omni.toolkit.design.mq.consumer.Consumer;
 import org.omni.toolkit.design.mq.producer.Producer;
 

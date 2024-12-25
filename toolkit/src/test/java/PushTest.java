@@ -1,10 +1,10 @@
 import org.omni.toolkit.design.mq.consumer.PushConsumer;
 import org.omni.toolkit.design.mq.consumer.consume.OrderConsume;
-import org.omni.toolkit.design.mq.event.Event;
-import org.omni.toolkit.design.mq.event.EventListener;
+import org.omni.toolkit.design.event.Event;
+import org.omni.toolkit.design.event.EventListener;
 import org.omni.toolkit.design.mq.producer.Producer;
 import org.omni.toolkit.design.mq.producer.PushProducer;
-import org.omni.toolkit.design.mq.topic.PushTopic;
+import org.omni.toolkit.design.mq.topic.Topic;
 import org.omni.toolkit.design.mq.topic.push.OrderPush;
 import org.omni.toolkit.vir.Virs;
 
@@ -15,12 +15,12 @@ import java.util.ArrayList;
  * @date 2024/11/12 15:22
  * @description
  */
-public class MqTest {
+public class PushTest {
 
     // 没有sleep再多测一些，有序无序
     // todo 一定要简单topic, producer, consumer的初始化
     public static void main(String[] args) throws InterruptedException {
-        var topic = new PushTopic<String>(12);
+        var topic = new Topic<String>(12);
         var push = new OrderPush<String>(true);
         topic.setPush(push);
         var producerList = new ArrayList<Producer<String>>();
