@@ -15,9 +15,7 @@
         <module>nacos</module>
         <module>redis</module>
         <module>mysql</module>
-        <module>auth</module>
         <module>http</module>
-        <module>block</module>
     </modules>
 
     <properties>
