@@ -1,0 +1,12 @@
+server:
+  port: 8007
+
+spring:
+  profiles:
+    include: mysql
+  threads:
+    virtual:
+      enabled: true
+  main:
+    lazy-initialization: false
+    web-application-type: reactive

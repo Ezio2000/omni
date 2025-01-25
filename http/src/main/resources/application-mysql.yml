@@ -1,0 +1,12 @@
+mysql:
+  default:
+    url: jdbc:mysql://10.3.0.21:63306/ruqi_gateway?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: gac_travel_test_new
+    password: NJElna9OCLisAi#5RfY8oi#M1Qp71ZX
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${mysql.default.url}
+    username: ${mysql.default.username}
+    password: ${mysql.default.password}

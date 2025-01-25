@@ -1,6 +1,5 @@
 package org.omni.toolkit.design.mq.topic.push;
 
-import lombok.extern.slf4j.Slf4j;
 import org.omni.toolkit.design.event.Event;
 import org.omni.toolkit.design.mq.consumer.Consumer;
 import org.omni.toolkit.design.mq.consumer.PushConsumer;
@@ -17,7 +16,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2024/11/12 10:46
  * @description
  */
-@Slf4j
 public class OrderPush<T> implements Push<T> {
 
     protected final Map<Queue<Event<T>>, Virs.LoopFuture> consumerPushFutureMap = new ConcurrentHashMap<>();

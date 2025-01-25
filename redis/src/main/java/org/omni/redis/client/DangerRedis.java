@@ -1,7 +1,6 @@
 package org.omni.redis.client;
 
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import org.omni.redis.command.DangerCommand;
 import org.omni.redis.manager.RedisCommandManager;
 import org.omni.toolkit.sug.Sugars;
@@ -15,7 +14,6 @@ import redis.clients.jedis.exceptions.JedisConnectionException;
  * @date 2024/11/7 19:31
  * @description
  */
-@Slf4j
 public class DangerRedis extends Redis implements DangerCommand {
 
     private JedisMonitor monitor;
@@ -82,7 +80,7 @@ public class DangerRedis extends Redis implements DangerCommand {
             try {
                 super.proceed(conn);
             } catch (JedisConnectionException e) {
-                log.info("Monitor connection closed.");
+//                log.info("Monitor connection closed.");
             }
         }
     }

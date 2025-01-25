@@ -12,7 +12,7 @@ import java.util.concurrent.locks.LockSupport;
 public class Virs {
 
     // todo 如何设置为可调大小？
-    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(50 /* 改成初始化 */, Thread.ofVirtual().factory());
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2 /* 改成初始化 */, Thread.ofVirtual().factory());
 
     private static final Map<Future<?>, AtomicBoolean> cancelMap = new ConcurrentHashMap<>();
 
