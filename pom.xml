@@ -16,6 +16,7 @@
         <module>redis</module>
         <module>mysql</module>
         <module>http</module>
+        <module>venti</module>
     </modules>
 
     <properties>
@@ -44,6 +45,12 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
+        </dependency>
+        <!-- 图 -->
+        <dependency>
+            <groupId>org.jgrapht</groupId>
+            <artifactId>jgrapht-core</artifactId>
+            <version>1.5.2</version>
         </dependency>
     </dependencies>
 

@@ -25,3 +25,4 @@ Manager -> manager operate -> operation
 24、updateObservers 主谓时可以使用xxs
 25、方法有多个参数 用[]不用...
 26、previous简称prev
+27、abstract简称abs或者取另外的概括的名称（最好）
